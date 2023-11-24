@@ -1,18 +1,18 @@
-package io.cwiekala.agregates;
+package io.cwiekala.lazy.loading;
 
-import static io.cwiekala.agregates.model.Currency.EURO;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import io.cwiekala.agregates.model.Address;
-import io.cwiekala.agregates.model.Auction;
-import io.cwiekala.agregates.model.Bid;
-import io.cwiekala.agregates.model.User;
-import io.cwiekala.agregates.repository.AddressRepository;
-import io.cwiekala.agregates.repository.AuctionRepository;
-import io.cwiekala.agregates.repository.BidRepository;
-import io.cwiekala.agregates.repository.UserRepository;
-import io.cwiekala.agregates.services.UserService;
+import io.cwiekala.lazy.loading.model.Address;
+import io.cwiekala.lazy.loading.model.Auction;
+import io.cwiekala.lazy.loading.model.Bid;
+import io.cwiekala.lazy.loading.model.User;
+import io.cwiekala.lazy.loading.repository.AddressRepository;
+import io.cwiekala.lazy.loading.repository.AuctionRepository;
+import io.cwiekala.lazy.loading.repository.BidRepository;
+import io.cwiekala.lazy.loading.repository.UserRepository;
+import io.cwiekala.lazy.loading.services.UserService;
+import io.cwiekala.lazy.loading.model.Currency;
 import java.math.BigDecimal;
 import java.util.List;
 import org.hibernate.StaleObjectStateException;
@@ -64,7 +64,7 @@ class UserSyncIT {
 
         // when:
         users.forEach(user ->
-            userService.placeBid(user.getId(), auction.getId(), BigDecimal.valueOf(200L), EURO));
+            userService.placeBid(user.getId(), auction.getId(), BigDecimal.valueOf(200L), Currency.EURO));
 
         // then:
         Auction auction1 = auctionRepository.getReferenceById(auction.getId());
@@ -85,7 +85,7 @@ class UserSyncIT {
         // when:
         userService.changeUserAddress(user, new Address("Warsaw"));
         ObjectOptimisticLockingFailureException exception = assertThrows(ObjectOptimisticLockingFailureException.class, () -> {
-            userService.placeBid(user, auction, BigDecimal.valueOf(200L), EURO);
+            userService.placeBid(user, auction, BigDecimal.valueOf(200L), Currency.EURO);
         });
         assertThat(exception.getCause().getClass()).isEqualTo(StaleObjectStateException.class);
         /**

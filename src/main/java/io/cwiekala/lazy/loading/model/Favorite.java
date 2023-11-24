@@ -1,4 +1,4 @@
-package io.cwiekala.agregates.model;
+package io.cwiekala.lazy.loading.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

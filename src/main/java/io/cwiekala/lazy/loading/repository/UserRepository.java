@@ -1,6 +1,6 @@
-package io.cwiekala.agregates.repository;
+package io.cwiekala.lazy.loading.repository;
 
-import io.cwiekala.agregates.model.User;
+import io.cwiekala.lazy.loading.model.User;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,15 +1,15 @@
-package io.cwiekala.agregates;
+package io.cwiekala.lazy.loading;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import io.cwiekala.agregates.model.Address;
-import io.cwiekala.agregates.model.Auction;
-import io.cwiekala.agregates.model.Bid;
-import io.cwiekala.agregates.model.User;
-import io.cwiekala.agregates.repository.AddressRepository;
-import io.cwiekala.agregates.repository.AuctionRepository;
-import io.cwiekala.agregates.repository.BidRepository;
-import io.cwiekala.agregates.repository.UserRepository;
+import io.cwiekala.lazy.loading.model.Address;
+import io.cwiekala.lazy.loading.model.Auction;
+import io.cwiekala.lazy.loading.model.Bid;
+import io.cwiekala.lazy.loading.model.User;
+import io.cwiekala.lazy.loading.repository.AddressRepository;
+import io.cwiekala.lazy.loading.repository.AuctionRepository;
+import io.cwiekala.lazy.loading.repository.BidRepository;
+import io.cwiekala.lazy.loading.repository.UserRepository;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AgregatesApplicationIT {
+class ApplicationIT {
 
     @Autowired
     AddressRepository addressRepository;

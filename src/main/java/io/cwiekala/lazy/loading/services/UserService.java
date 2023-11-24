@@ -1,13 +1,12 @@
-package io.cwiekala.agregates.services;
+package io.cwiekala.lazy.loading.services;
 
-import io.cwiekala.agregates.model.Address;
-import io.cwiekala.agregates.model.Auction;
-import io.cwiekala.agregates.model.Bid;
-import io.cwiekala.agregates.model.Currency;
-import io.cwiekala.agregates.model.Favorite;
-import io.cwiekala.agregates.model.User;
-import io.cwiekala.agregates.repository.AuctionRepository;
-import io.cwiekala.agregates.repository.UserRepository;
+import io.cwiekala.lazy.loading.model.Address;
+import io.cwiekala.lazy.loading.model.Auction;
+import io.cwiekala.lazy.loading.model.Bid;
+import io.cwiekala.lazy.loading.model.Currency;
+import io.cwiekala.lazy.loading.model.User;
+import io.cwiekala.lazy.loading.repository.AuctionRepository;
+import io.cwiekala.lazy.loading.repository.UserRepository;
 import java.math.BigDecimal;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;

@@ -1,16 +1,16 @@
-package io.cwiekala.agregates;
+package io.cwiekala.lazy.loading;
 
-import static io.cwiekala.agregates.model.Currency.EURO;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import io.cwiekala.agregates.model.Address;
-import io.cwiekala.agregates.model.Auction;
-import io.cwiekala.agregates.model.User;
-import io.cwiekala.agregates.repository.AddressRepository;
-import io.cwiekala.agregates.repository.AuctionRepository;
-import io.cwiekala.agregates.repository.BidRepository;
-import io.cwiekala.agregates.repository.UserRepository;
-import io.cwiekala.agregates.services.UserService;
+import io.cwiekala.lazy.loading.model.Address;
+import io.cwiekala.lazy.loading.model.Auction;
+import io.cwiekala.lazy.loading.model.User;
+import io.cwiekala.lazy.loading.repository.AddressRepository;
+import io.cwiekala.lazy.loading.repository.AuctionRepository;
+import io.cwiekala.lazy.loading.repository.BidRepository;
+import io.cwiekala.lazy.loading.repository.UserRepository;
+import io.cwiekala.lazy.loading.services.UserService;
+import io.cwiekala.lazy.loading.model.Currency;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +73,7 @@ class UserAsyncIT {
         List<Future> tasks = new ArrayList<>();
         users.parallelStream().forEach(user ->
             tasks.add(executor.submit(
-                () -> userService.placeBid(user.getId(), auction.getId(), BigDecimal.valueOf(200L), EURO))));
+                () -> userService.placeBid(user.getId(), auction.getId(), BigDecimal.valueOf(200L), Currency.EURO))));
         executor.awaitTermination(10, TimeUnit.SECONDS);
 
         Boolean exceptionWasThrown = false;
@@ -108,7 +108,7 @@ class UserAsyncIT {
         // when - 2 different asynchronous calls
         // placing bid is totally different operation than changing Address!
         final ExecutorService executor = Executors.newFixedThreadPool(10);
-        Future placeBidTask = executor.submit(() -> userService.placeBid(user.getId(), auction.getId(), BigDecimal.valueOf(200L), EURO));
+        Future placeBidTask = executor.submit(() -> userService.placeBid(user.getId(), auction.getId(), BigDecimal.valueOf(200L), Currency.EURO));
         Future changeUserAddressTask = executor.submit(() -> userService.changeUserAddress(user.getId(), new Address("Warsaw")));
         executor.awaitTermination(10, TimeUnit.SECONDS);
         List<Future> tasks = List.of(placeBidTask, changeUserAddressTask);
