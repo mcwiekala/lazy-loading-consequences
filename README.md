@@ -12,23 +12,25 @@ This is very easy to achieve. However, it results in increasingly larger transac
 ![big-cluster-of-entities.png](docs%2Fbig-cluster-of-entities.png)
 
 
-Problems are related to `ObjectOptimisticLockingFailureException` caused by `StaleObjectStateException`
+Problems are related to `OptimisticLocks` because often the data are `Stale`.
 
  - **Synchronous operations** - object on the client side is stale and then happens update
 [Check this test.](src/test/java/io/cwiekala/agregates/UserSyncIT.java)
  - **Asynchronous operations** - concurrent changes with multiple users competing with each other (changes are in the same table)
 [Check this test.](src/test/java/io/cwiekala/agregates/UserAsyncIT.java)
 
-## Database
+## Why locks happnes?
 
-This project uses Docker and Postgres DB, because embedded H2 does not support parallel transactions
+Database is a very concurrent system where multiple operations happen in the same time. 
+The `Lost Update` is an anomaly related to databases when multiple updates trying to override the same data. To prevent it DB uses tools like `Optimistic` or `Pesimistic Locks`
 
-http://www.h2database.com/html/advanced.html#mvcc
-
-## Lost Update anomaly
 Here is described this problem from the database perspective:
 ![lost-updates.png](docs%2Flost-updates.png)
 
 _image credits to [Vlad Mihalcea](https://vladmihalcea.com/a-beginners-guide-to-database-locking-and-the-lost-update-phenomena/)_
 
+## Database
 
+This project uses Docker and Postgres DB, because embedded H2 does not support parallel transactions
+
+http://www.h2database.com/html/advanced.html#mvcc
