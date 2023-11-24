@@ -34,3 +34,9 @@ _image credits to [Vlad Mihalcea](https://vladmihalcea.com/a-beginners-guide-to-
 This project uses Docker and Postgres DB, because embedded H2 does not support parallel transactions
 
 http://www.h2database.com/html/advanced.html#mvcc
+
+## Medium
+
+Check my article on Medium which explores this subject!
+
+https://medium.com/@michal.cwiekala/aggregates-f1baeca4d5f0
